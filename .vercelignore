@@ -1,0 +1,17 @@
+.env
+.env.*
+server/.env
+server/.env.*
+**/node_modules/**
+.git/**
+.agents/**
+.codex/**
+**/*.sql
+**/*.log
+**/*.err
+server/tests/**
+server/import-mysql.js
+server/migrate.js
+server/migrations/**
+server/MIGRATION.md
+skills-lock.json

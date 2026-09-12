@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports | Campus Net Monitor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/pages/reports.css">
+</head>
+
+<body class="sidebar-layout">
+    <div id="sidebar-container"></div>
+
+    <nav class="navbar navbar-expand-lg top-navbar">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" onclick="toggleSidebar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <h5 class="mb-0 text-secondary" id="page-title">Reports</h5>
+        </div>
+    </nav>
+
+    <div class="main-content">
+
+        <!-- Period Filter -->
+        <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+            <div>
+                <h5 class="section-heading mb-1">Network Analytics</h5>
+                <p class="text-muted mb-0" style="font-size:0.875rem;">Historical trends, performance summaries, and infrastructure utilization.</p>
+            </div>
+            <ul class="nav nav-pills" id="period-tabs">
+                <li class="nav-item">
+                    <button class="nav-link active" data-period="24h">Last 24 Hours</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-period="7d">Last 7 Days</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-period="30d">Last 30 Days</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="card p-3 stat-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="stat-label">Devices Monitored</h6>
+                            <h2 class="mb-0 stat-value" id="stat-devices">--</h2>
+                        </div>
+                        <span class="stat-icon stat-icon-primary"><i class="fas fa-network-wired"></i></span>
+                    </div>
+                    <small class="text-muted stat-note">Active in selected period</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 stat-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="stat-label">Avg Uptime</h6>
+                            <h2 class="mb-0 text-success stat-value" id="stat-uptime">--</h2>
+                        </div>
+                        <span class="stat-icon stat-icon-success"><i class="fas fa-check-circle"></i></span>
+                    </div>
+                    <small class="text-muted stat-note">Network-wide availability</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 stat-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="stat-label">Avg Latency</h6>
+                            <h2 class="mb-0 text-warning stat-value" id="stat-latency">--</h2>
+                        </div>
+                        <span class="stat-icon stat-icon-warning"><i class="fas fa-tachometer-alt"></i></span>
+                    </div>
+                    <small class="text-muted stat-note">Mean response time (ms)</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 stat-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="stat-label">Total Alerts</h6>
+                            <h2 class="mb-0 text-danger stat-value" id="stat-alerts">--</h2>
+                        </div>
+                        <span class="stat-icon stat-icon-danger"><i class="fas fa-bell"></i></span>
+                    </div>
+                    <small class="text-muted stat-note">Events in selected period</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row g-4 mb-4">
+            <div class="col-12 col-lg-8">
+                <div class="card p-4 panel-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="section-title mb-0">Latency Trend</h6>
+                        <span class="text-muted" style="font-size:0.8rem;" id="latency-trend-label">Avg response time over time</span>
+                    </div>
+                    <div id="latency-chart-empty" class="text-center text-muted py-5" style="display:none!important;">
+                        <i class="fas fa-chart-line fa-2x mb-2 opacity-50"></i><br>No latency data for this period yet.
+                    </div>
+                    <canvas id="latencyTrendChart" height="260"></canvas>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card p-4 panel-card">
+                    <h6 class="section-title mb-3">Alert Breakdown</h6>
+                    <div id="alert-doughnut-empty" class="text-center text-muted py-5" style="display:none!important;">
+                        <i class="fas fa-bell fa-2x mb-2 opacity-50"></i><br>No alerts in this period.
+                    </div>
+                    <canvas id="alertDoughnutChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Trend Analytics ──────────────────────────────────────────── -->
+        <div class="d-flex align-items-center gap-3 mb-3 mt-2">
+            <span class="stat-icon stat-icon-primary" style="width:36px;height:36px;font-size:1rem;flex-shrink:0;">
+                <i class="fas fa-chart-area"></i>
+            </span>
+            <div>
+                <h5 class="section-heading mb-0">Trend Analytics</h5>
+                <p class="text-muted mb-0" style="font-size:0.85rem;">Historical incident patterns, peak failure windows, and proactive maintenance insights.</p>
+            </div>
+        </div>
+
+        <!-- Trend KPI Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div class="card p-3 stat-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="stat-label">Avg Resolution</h6>
+                            <h2 class="mb-0 stat-value" id="trend-mttr">--</h2>
+                        </div>
+                        <span class="stat-icon stat-icon-warning"><i class="fas fa-hourglass-half"></i></span>
+                    </div>
+                    <small class="text-muted stat-note">Mean time to resolve incidents</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card p-3 stat-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="stat-label">Resolution Rate</h6>
+                            <h2 class="mb-0 text-success stat-value" id="trend-resolution-rate">--</h2>
+                        </div>
+                        <span class="stat-icon stat-icon-success"><i class="fas fa-check-double"></i></span>
+                    </div>
+                    <small class="text-muted stat-note">Downtime incidents resolved</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card p-3 stat-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div style="min-width:0;flex:1;">
+                            <h6 class="stat-label">Most Problematic</h6>
+                            <p class="mb-0 fw-bold text-truncate" style="font-size:1rem;color:#122f4b;" id="trend-worst-device">--</p>
+                        </div>
+                        <span class="stat-icon stat-icon-danger" style="flex-shrink:0;"><i class="fas fa-exclamation-circle"></i></span>
+                    </div>
+                    <small class="text-muted stat-note" id="trend-worst-device-count">Highest alert count</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card p-3 stat-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="stat-label">Peak Failure Hour</h6>
+                            <h2 class="mb-0 text-danger stat-value" id="trend-peak-hour">--</h2>
+                        </div>
+                        <span class="stat-icon stat-icon-danger"><i class="fas fa-fire"></i></span>
+                    </div>
+                    <small class="text-muted stat-note">Most incidents occur at</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Incident Frequency + Peak Hours -->
+        <div class="row g-4 mb-4">
+            <div class="col-12 col-lg-8">
+                <div class="card p-4 panel-card">
+                    <h6 class="section-title mb-3">Incident Frequency Over Time</h6>
+                    <div id="incident-trend-empty" class="text-center text-muted py-5" style="display:none!important;">
+                        <i class="fas fa-chart-bar fa-2x mb-2 opacity-50"></i><br>No incident data for this period.
+                    </div>
+                    <canvas id="incidentTrendChart" height="220"></canvas>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card p-4 panel-card">
+                    <h6 class="section-title mb-3">Peak Failure Hours</h6>
+                    <div id="peak-hours-empty" class="text-center text-muted py-5" style="display:none!important;">
+                        <i class="fas fa-clock fa-2x mb-2 opacity-50"></i><br>No incident data for this period.
+                    </div>
+                    <canvas id="peakHoursChart" height="220"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Problem Devices + Location Health -->
+        <div class="row g-4 mb-4">
+            <div class="col-12 col-lg-6">
+                <div class="card p-4 panel-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="section-title mb-0">Top Problem Devices</h6>
+                        <span class="text-muted" style="font-size:0.8rem;">By incident count</span>
+                    </div>
+                    <div id="top-devices-empty" class="text-center text-muted py-5" style="display:none!important;">
+                        <i class="fas fa-check-circle fa-2x mb-2 opacity-50 text-success"></i><br>No incidents recorded for this period.
+                    </div>
+                    <canvas id="topDevicesChart"></canvas>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="card p-4 panel-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="section-title mb-0">Location Health</h6>
+                        <span class="text-muted" style="font-size:0.8rem;">Uptime by building</span>
+                    </div>
+                    <div id="location-health-empty" class="text-center text-muted py-5" style="display:none!important;">
+                        <i class="fas fa-building fa-2x mb-2 opacity-50"></i><br>No location data for this period.
+                    </div>
+                    <canvas id="locationHealthChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Uptime / Downtime Bar Chart -->
+        <div class="card panel-card p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="section-title mb-0">Device Uptime vs Downtime</h6>
+                <span class="text-muted" style="font-size:0.8rem;">Percentage of polling intervals per device</span>
+            </div>
+            <div id="uptime-bar-empty" class="text-center text-muted py-5" style="display:none!important;">
+                <i class="fas fa-chart-bar fa-2x mb-2 opacity-50"></i><br>No uptime data for this period yet.
+            </div>
+            <canvas id="uptimeBarChart"></canvas>
+        </div>
+
+        <!-- Device Performance Table -->
+        <div class="card panel-card p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="section-title mb-0">Device Performance Summary</h6>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted" style="font-size:0.8rem;">Sorted by uptime (worst first)</span>
+                    <button class="btn btn-outline-secondary btn-sm" id="export-perf-csv-btn">
+                        <i class="fas fa-download me-1"></i>Export CSV
+                    </button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle" id="device-perf-table">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Device Name</th>
+                            <th>Type</th>
+                            <th>Building / Floor</th>
+                            <th>Uptime %</th>
+                            <th>Avg Latency</th>
+                            <th>Alerts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                <i class="fas fa-spinner fa-spin me-2"></i>Loading performance data...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- AI Network Insights -->
+        <div class="card panel-card p-4 mt-4" id="ai-insights-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="stat-icon stat-icon-primary" style="width:32px;height:32px;font-size:0.9rem;flex-shrink:0;">
+                        <i class="fas fa-robot"></i>
+                    </span>
+                    <div>
+                        <h6 class="section-title mb-0">AI Network Insights</h6>
+                        <small class="text-muted">Powered by Claude — health assessment &amp; recommendations</small>
+                    </div>
+                </div>
+                <button class="btn btn-outline-primary btn-sm" id="refresh-ai-insights-btn">
+                    <i class="fas fa-sync-alt me-1"></i>Generate Insights
+                </button>
+            </div>
+
+            <!-- Loading state -->
+            <div id="ai-insights-loading" class="text-center text-muted py-4" style="display:none;">
+                <i class="fas fa-circle-notch fa-spin fa-lg mb-2"></i>
+                <div class="mt-2" style="font-size:0.875rem;">Analyzing network telemetry with AI…</div>
+            </div>
+
+            <!-- Empty / not yet loaded state -->
+            <div id="ai-insights-empty" class="text-center text-muted py-4">
+                <i class="fas fa-brain fa-2x mb-2 opacity-50"></i>
+                <div class="mt-2" style="font-size:0.875rem;">Click <strong>Generate Insights</strong> to run an AI analysis of your network data.</div>
+            </div>
+
+            <!-- Error state -->
+            <div id="ai-insights-error" class="alert alert-warning mb-0" style="display:none;">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <span id="ai-insights-error-msg">Unable to load AI insights.</span>
+            </div>
+
+            <!-- Insights content -->
+            <div id="ai-insights-content" style="display:none;">
+                <div id="ai-insights-text" class="ai-insights-body"></div>
+                <div class="text-end mt-3">
+                    <small class="text-muted" id="ai-insights-timestamp"></small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.5/dist/socket.io.min.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/monitoring.js"></script>
+    <script src="../js/analytics.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+</body>
+
+</html>
