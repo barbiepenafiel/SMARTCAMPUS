@@ -1,92 +1,153 @@
-# SmartCampus SecureNet
+# 🛡️ SmartCampus SecureNet
 
-Real-time campus network monitoring and device management system for IC Building, DNSC.
+> **A Web-Based Device Mapping and Monitoring Dashboard for Network and Security Devices**
 
----
+SmartCampus SecureNet is a web-based network monitoring and device management system designed for the **IC Building of Davao del Norte State College (DNSC)**.
 
-## Table of Contents
-
-1. [Project Overview](#1-project-overview)
-2. [Features](#2-features)
-3. [Technology Stack](#3-technology-stack)
-4. [Folder Structure](#4-folder-structure)
-5. [Prerequisites](#5-prerequisites)
-6. [Installation](#6-installation)
-7. [Environment Configuration](#7-environment-configuration)
-8. [Database Setup](#8-database-setup)
-9. [Running the Project](#9-running-the-project)
-10. [First-Time Setup](#10-first-time-setup)
-11. [Usage Guide](#11-usage-guide)
-12. [API Reference](#12-api-reference)
-13. [Troubleshooting](#13-troubleshooting)
-14. [Deployment](#14-deployment)
-15. [Security Notes](#15-security-notes)
+The system automatically discovers network devices using **ARP (Address Resolution Protocol)** and **ICMP (Internet Control Message Protocol)** and provides IT personnel with real-time information about device connectivity, availability, latency, topology, alerts, and network performance.
 
 ---
 
-## 1. Project Overview
+## 📑 Table of Contents
 
-SmartCampus SecureNet is a full-stack web application for monitoring campus network infrastructure in real time. It discovers devices connected to the campus subnet via ICMP ping, ARP table parsing, and optional SNMP queries, then tracks their availability, latency, and topology. Administrators and IT staff can view dashboards, manage devices, resolve alerts, and export reports.
-
-Target environment: IC Building network — DNSC (De La Salle University – Dasmariñas).
-
----
-
-## 2. Features
-
-| Feature | Description |
-|---------|-------------|
-| Device Discovery | Automated ICMP ping sweep + ARP table scanning |
-| Real-Time Status | Live device online/offline feed via Socket.IO |
-| Network Topology | Graph view, floor map overlay, hierarchy view (Vis-Network) |
-| Alerting | Downtime, recovery, and high-latency alerts with email notifications |
-| Analytics | Latency trends, uptime %, alert summaries — 24h / 7d / 30d periods |
-| RBAC | Role-based access control — Admin and IT Staff roles |
-| Audit Log | Complete activity trail with user, action, IP, and timestamp |
-| CSV Export | Export alert history and reports |
-| SNMP Support | Optional SNMP metadata collection from managed devices |
+* [Project Overview](#-project-overview)
+* [Key Features](#-key-features)
+* [System Users](#-system-users)
+* [Technology Stack](#-technology-stack)
+* [Project Structure](#-project-structure)
+* [Prerequisites](#-prerequisites)
+* [Installation](#-installation)
+* [Environment Configuration](#-environment-configuration)
+* [Database Setup](#-database-setup)
+* [Running the Project](#-running-the-project)
+* [First-Time Setup](#-first-time-setup)
+* [Usage Guide](#-usage-guide)
+* [API Reference](#-api-reference)
+* [Troubleshooting](#-troubleshooting)
+* [Deployment](#-deployment)
+* [Security Notes](#-security-notes)
+* [Project Information](#-project-information)
 
 ---
 
-## 3. Technology Stack
+# 📌 Project Overview
 
-### Backend
-| Component | Library/Version |
-|-----------|----------------|
-| Runtime | Node.js 22+ |
-| Framework | Express 4.x |
-| Database | Supabase PostgreSQL (pg) |
-| Real-time | Socket.IO 4.7.5 |
-| Auth | express-session + bcryptjs |
-| Email | nodemailer (Gmail SMTP) |
-| Network | ping, net-snmp, child_process |
+**SmartCampus SecureNet** is a full-stack web application developed to improve the monitoring and management of network infrastructure within the **IC Building of Davao del Norte State College**.
 
-### Frontend
-| Component | Library/Version |
-|-----------|----------------|
-| UI Framework | Bootstrap 5.3.3 |
-| Charts | Chart.js 4.4.1 |
-| Topology | Vis-Network 9.1.2, Cytoscape 3.30.2 |
-| Real-time | Socket.IO Client 4.7.5 |
-| Icons | Font Awesome 6.5.1 |
-| Fonts | Google Fonts (IBM Plex Sans, Sora) |
+The system uses **ARP scanning** and **ICMP ping** to discover and monitor network devices such as:
+
+* Routers
+* Switches
+* Access Points
+* Computers
+* Other connected network devices
+
+It provides a centralized dashboard where authorized users can monitor device status, analyze network performance, view topology, receive actionable alerts, and generate reports.
+
+The system is intended to help network administrators and IT personnel identify connectivity problems more efficiently and maintain better visibility of the campus network environment.
 
 ---
 
-## 4. Folder Structure
+# ✨ Key Features
 
-```
+| Feature                          | Description                                                                                        |
+| -------------------------------- | -------------------------------------------------------------------------------------------------- |
+| 🔍 **Device Discovery**          | Automatically discovers network devices using ICMP ping sweeps and ARP table scanning.             |
+| 🟢 **Real-Time Monitoring**      | Displays the current online, offline, and warning status of network devices.                       |
+| 🗺️ **Network Topology**         | Provides graph, hierarchy, and floor-based visualizations of network devices.                      |
+| 📡 **Connectivity Monitoring**   | Tracks device availability and latency through ICMP.                                               |
+| 🚨 **Alert Management**          | Generates alerts for downtime, recovery, and abnormal network conditions.                          |
+| 📧 **Email Notifications**       | Sends important network alerts to authorized personnel.                                            |
+| 📊 **Network Analytics**         | Displays latency trends, uptime percentages, alert summaries, and network performance information. |
+| 🗂️ **Device Filtering**         | Allows devices to be filtered by category, date, location, and status.                             |
+| 🏷️ **Device Classification**    | Organizes network devices into categories such as routers, switches, and access points.            |
+| 👥 **Role-Based Access Control** | Provides separate permissions for Network Administrators and IT Personnel.                         |
+| 📝 **Audit Logging**             | Records system activities including user, action, IP address, and timestamp.                       |
+| 📄 **Report Generation**         | Provides network monitoring reports and CSV exports.                                               |
+| ⚡ **Real-Time Updates**          | Uses Socket.IO to update device information without manually refreshing pages.                     |
+
+---
+
+# 👥 System Users
+
+SmartCampus SecureNet supports two primary user roles.
+
+### Network Administrator
+
+The Network Administrator has full access to the system and can:
+
+* Monitor network devices
+* Manage device information
+* View network topology
+* View network analytics
+* Configure system settings
+* Manage users
+* Review activity logs
+* Resolve alerts
+* Generate reports
+* Configure monitoring settings
+
+### IT Personnel
+
+IT Personnel have monitoring-focused access and can:
+
+* View discovered devices
+* Monitor device status
+* View network topology
+* Check network performance
+* View analytics
+* Review alerts
+* Filter devices
+* Generate or view permitted reports
+
+---
+
+# 🛠️ Technology Stack
+
+## Backend
+
+| Component               | Technology                 |
+| ----------------------- | -------------------------- |
+| Runtime                 | Node.js 22+                |
+| Framework               | Express 4.x                |
+| Database                | Supabase PostgreSQL        |
+| Real-Time Communication | Socket.IO 4.7.5            |
+| Authentication          | express-session + bcryptjs |
+| Email                   | Nodemailer                 |
+| Network Discovery       | ICMP Ping + ARP            |
+| System Commands         | Node.js `child_process`    |
+
+## Frontend
+
+| Component             | Technology             |
+| --------------------- | ---------------------- |
+| UI Framework          | Bootstrap 5.3.3        |
+| Charts                | Chart.js 4.4.1         |
+| Network Visualization | Vis-Network 9.1.2      |
+| Graph Visualization   | Cytoscape 3.30.2       |
+| Real-Time Client      | Socket.IO Client 4.7.5 |
+| Icons                 | Font Awesome 6.5.1     |
+| Fonts                 | IBM Plex Sans / Sora   |
+
+---
+
+# 📁 Project Structure
+
+```text
 smartCampus/
-├── .env                        # Environment configuration (never commit)
+│
+├── .env
 ├── .gitignore
-├── vercel.json                 # Vercel deployment rewrites
+├── vercel.json
 ├── README.md
+│
 ├── server/
-│   ├── server.js              # Main Express server (API, scanning, Socket.IO)
+│   ├── server.js
 │   ├── package.json
 │   └── package-lock.json
-├── html/                       # Frontend HTML pages
-│   ├── index.html             # Dashboard
+│
+├── html/
+│   ├── index.html
 │   ├── login.html
 │   ├── signup.html
 │   ├── devices.html
@@ -94,46 +155,77 @@ smartCampus/
 │   ├── alerts.html
 │   ├── reports.html
 │   ├── profile.html
-│   ├── settings.html          # Admin only
-│   ├── users.html             # Admin only
-│   └── activity.html          # Admin only
-├── js/                         # Frontend JavaScript modules
-│   ├── script.js              # Core app logic
-│   ├── auth.js                # Auth / session management
-│   ├── monitoring.js          # Real-time monitoring cycle
-│   ├── analytics.js           # Analytics charts
-│   ├── users.js               # User management UI
-│   └── activity.js            # Activity log UI
-├── css/pages/                  # Per-page stylesheets
+│   ├── settings.html
+│   ├── users.html
+│   └── activity.html
+│
+├── js/
+│   ├── script.js
+│   ├── auth.js
+│   ├── monitoring.js
+│   ├── analytics.js
+│   ├── users.js
+│   └── activity.js
+│
+├── css/
+│   └── pages/
+│
 ├── components/
-│   └── sidebar.html           # Reusable navigation sidebar
-└── images/                     # Logos and floor plan images
+│   └── sidebar.html
+│
+└── images/
+    └── ...
 ```
 
----
-
-## 5. Prerequisites
-
-| Requirement | Version | Notes |
-|-------------|---------|-------|
-| Node.js | 22+ | [nodejs.org](https://nodejs.org) |
-| npm | 9+ | Bundled with Node.js |
-| Supabase | PostgreSQL | Session-pooler connection required; MySQL needed only to import old data |
-| Git | Any | |
-| OS | Windows 10/11 or Linux | ARP/gateway detection uses `ipconfig` on Windows, `ip route` on Linux |
-
-> **Windows users**: The server uses `ipconfig` and `arp -a` to detect the gateway and connected devices. Run the server on the same machine connected to the campus network.
+> **Important:** Never commit the `.env` file because it contains sensitive configuration and credentials.
 
 ---
 
-## 6. Installation
+# 📋 Prerequisites
+
+Before installing SmartCampus SecureNet, make sure the following are installed or available:
+
+| Requirement      | Version / Description                     |
+| ---------------- | ----------------------------------------- |
+| Node.js          | 22+                                       |
+| npm              | 9+                                        |
+| Git              | Latest recommended version                |
+| Supabase         | PostgreSQL database                       |
+| Operating System | Windows 10/11 or Linux                    |
+| Network Access   | Connection to the network being monitored |
+
+### Windows
+
+The backend uses commands such as:
 
 ```bash
-# 1. Clone the repository
-git clone <repository-url>
-cd smartCampus
+ipconfig
+arp -a
+```
 
-# 2. Install backend dependencies
+These commands are used to determine network information and discover connected devices.
+
+For accurate network monitoring, the backend should run on a computer connected to the target campus network.
+
+---
+
+# 🚀 Installation
+
+## 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+```
+
+Enter the project directory:
+
+```bash
+cd smartCampus
+```
+
+## 2. Install Backend Dependencies
+
+```bash
 cd server
 npm install
 cd ..
@@ -141,322 +233,682 @@ cd ..
 
 ---
 
-## 7. Environment Configuration
+# ⚙️ Environment Configuration
 
-### Supabase connection
+Create the required `.env` configuration files before starting the application.
 
-The backend stores application data in Supabase PostgreSQL. Node.js 22 or newer is required for `@supabase/server`.
+## Supabase Configuration
 
-Set these variables in the root `.env` (never commit actual keys):
+Add your Supabase credentials:
 
 ```env
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 SUPABASE_SECRET_KEY=sb_secret_...
 SUPABASE_JWKS_URL=https://your-project.supabase.co/auth/v1/.well-known/jwks.json
+SUPABASE_DB_URL=your_postgresql_session_pooler_connection
 ```
 
-Environment variables supplied by the host take priority, followed by `server/.env`, then the root `.env`. Avoid defining Supabase credentials in both files.
+Never expose the `SUPABASE_SECRET_KEY` to frontend JavaScript.
 
-Run `npm install` in `server/`, then `npm run check:supabase` to verify both keys, the database API, and JWKS without modifying data. Restart the backend after changing credentials.
+The administrative Supabase client should only be used for authorized backend operations.
 
-Backend code can use `getSupabaseClients()` from `server/supabase.js`; clients are also available as `app.locals.supabase` and `app.locals.supabaseAdmin`. The admin client bypasses RLS and must only be used in authorized backend operations. Never send it or its key to the browser.
+---
 
-Set `SUPABASE_DB_URL` to your PostgreSQL session-pooler connection string and follow [the migration guide](server/MIGRATION.md) before starting the backend. API keys alone are insufficient for database migrations.
-
-Create a `.env` file in the `server/` directory (copy the template below). **Never commit this file.**
+## Session Configuration
 
 ```env
-# ── Database ───────────────────────────────────────────
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=your_mysql_root_password
-DB_NAME=smartcampus
-
-# ── Session ────────────────────────────────────────────
-# Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-SESSION_SECRET=replace_with_64_char_random_hex_string
+SESSION_SECRET=replace_with_64_character_random_string
 SESSION_MAX_AGE_MS=28800000
-SESSION_COOKIE_SECURE=false       # Set to true when running behind HTTPS
+SESSION_COOKIE_SECURE=false
+```
 
-# ── Network Scanning ───────────────────────────────────
-SNMP_ENABLED=false
-ROUTER_IP=192.168.254.254         # Your campus gateway IP
-NETWORK_CIDR=                     # Optional: auto-detected if left blank
-BLACKLISTED_IPS=                  # Comma-separated IPs to exclude from scan
+Generate a secure session secret with:
 
-# ── Email Alerts ───────────────────────────────────────
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+For HTTPS production environments:
+
+```env
+SESSION_COOKIE_SECURE=true
+```
+
+---
+
+## Network Configuration
+
+```env
+ROUTER_IP=192.168.254.254
+NETWORK_CIDR=
+BLACKLISTED_IPS=
+```
+
+`NETWORK_CIDR` can be left blank when automatic network detection is available.
+
+Example:
+
+```env
+NETWORK_CIDR=192.168.1.0/24
+```
+
+Multiple excluded IP addresses can be added to:
+
+```env
+BLACKLISTED_IPS=192.168.1.5,192.168.1.10
+```
+
+---
+
+## Email Alert Configuration
+
+```env
 ALERT_EMAIL_ENABLED=true
+
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_SECURE=false
+
 SMTP_USER=your_sender@gmail.com
-SMTP_PASS=your_gmail_app_password  # Google App Password (not your login password)
+SMTP_PASS=your_gmail_app_password
+
 ALERT_EMAIL_FROM=SmartCampus SecureNet
 ALERT_EMAIL_TO=it_team@yourinstitution.edu
+```
 
-# ── CORS (production) ──────────────────────────────────
+Use a **Google App Password**, not your normal Gmail password.
+
+### Gmail App Password
+
+1. Open your Google Account.
+2. Go to **Security**.
+3. Enable **2-Step Verification**.
+4. Search for **App Passwords**.
+5. Create an App Password for your application.
+6. Add the generated password to `SMTP_PASS`.
+
+---
+
+## CORS Configuration
+
+For local development:
+
+```env
 ALLOWED_ORIGINS=http://localhost:3000
 ```
 
-### Generating a Gmail App Password
-
-1. Go to [Google Account](https://myaccount.google.com) → Security → 2-Step Verification (must be enabled)
-2. Search for "App Passwords"
-3. Create a new app password for "Mail"
-4. Paste the 16-character password into `SMTP_PASS`
+For production, replace this with the deployed frontend domain.
 
 ---
 
-## 8. Database Setup
+# 🗄️ Database Setup
 
-Follow [the MySQL-to-Supabase migration guide](server/MIGRATION.md) for connection settings and data transfer.
+SmartCampus SecureNet uses **Supabase PostgreSQL** as its application database.
 
-From the `server/` directory:
+From the `server` directory, run:
 
 ```bash
 npm run db:migrate
-# For existing MySQL records, after setting MYSQL_DATETIME_OFFSET:
+```
+
+If migrating existing records from the project's previous MySQL database:
+
+```bash
 npm run db:import:mysql
+```
+
+After migration:
+
+```bash
 npm start
 ```
 
-The schema migration creates the seven application tables. The importer preserves existing accounts, password hashes, device IDs, logs, and alerts. It refuses to overwrite populated target tables. Existing MySQL data is left intact.
+The migration process creates the required application tables.
+
+Existing MySQL records can be imported while preserving information such as:
+
+* User accounts
+* Password hashes
+* Device IDs
+* Activity logs
+* Alerts
+
+Refer to:
+
+```text
+server/MIGRATION.md
+```
+
+for the complete migration procedure.
 
 ---
 
-## 9. Running the Project
+# ▶️ Running the Project
 
-### Start the Backend Server
+## Start the Backend
+
+Open a terminal:
 
 ```bash
 cd server
 node server.js
 ```
 
-The server starts on **http://localhost:4000** and prints a startup message including the detected gateway IP and CIDR.
+The backend should start at:
 
-### Serve the Frontend
+```text
+http://localhost:4000
+```
 
-The frontend is static HTML. Open pages directly in a browser or use a local static server:
+The terminal will display startup information such as the detected gateway and network CIDR.
+
+---
+
+## Start the Frontend
+
+From the project root:
 
 ```bash
-# From the project root
 npx serve .
 ```
 
-Then navigate to: **http://localhost:3000/html/login.html**
+The frontend should normally become available at:
 
-> Alternatively, open `html/login.html` directly in a browser (file://) — API calls will still reach the backend at localhost:4000.
+```text
+http://localhost:3000
+```
 
----
+Open:
 
-## 10. First-Time Setup
-
-1. Start the backend server (step 9 above).
-2. Register an account at `html/signup.html`.
-3. For a fresh database, elevate your first account in the Supabase SQL editor:
-   ```sql
-   UPDATE public."USERS" SET "Role" = 'Admin' WHERE "Email" = 'your@email.com';
-   ```
-4. Log in at `html/login.html`.
-5. Navigate to **Settings** to configure:
-   - Enable/disable automated scanning
-   - Adjust scan interval
-   - Toggle email alerts
+```text
+http://localhost:3000/html/login.html
+```
 
 ---
 
-## 11. Usage Guide
+# 🔑 First-Time Setup
 
-### Dashboard (`index.html`)
-Shows total devices, online count, average latency, active alerts, a latency trend chart, and a live ping feed updated every 2 seconds.
+After successfully running the application:
 
-### Devices (`devices.html`)
-Lists all discovered devices. Click any row to open a detail modal where you can:
-- View IP, MAC, status, latency, location
-- Edit device name, type, building, floor, room
-- Ping the device on demand
-- Delete the device (Admin only)
+1. Open `html/signup.html`.
+2. Register the first user account.
+3. Open the Supabase SQL Editor.
+4. Assign the first account the Admin role.
 
-### Topology (`topology.html`)
-Three view modes:
-- **Graph** — Force-directed Vis-Network diagram
-- **Floor Map** — Drag-and-drop device placement on floor plan images
-- **Hierarchy** — Tree view grouped by floor
+Example:
 
-### Alerts (`alerts.html`)
-Shows the last 100 alerts with severity (danger / warning / success). Mark alerts as resolved. Export to CSV.
+```sql
+UPDATE public."USERS"
+SET "Role" = 'Admin'
+WHERE "Email" = 'your@email.com';
+```
 
-### Reports (`reports.html`)
-Four analytics panels with 24h / 7d / 30d time selectors:
-- Overview stats
-- Latency trend chart
-- Per-device uptime %
-- Alert summary by type
-
-### Settings (`settings.html`) — Admin only
-Toggle scanning on/off, set scan interval, configure email alerts at runtime.
-
-### Users (`users.html`) — Admin only
-Create, delete, and change roles of user accounts.
-
-### Activity Log (`activity.html`) — Admin only
-Paginated audit log of all user actions and system events.
+5. Log in using the registered account.
+6. Open **Settings**.
+7. Configure network monitoring and email alert settings.
 
 ---
 
-## 12. API Reference
+# 📖 Usage Guide
 
-All endpoints are served at `http://localhost:4000`.
+## 📊 Dashboard
 
-### Authentication
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/api/auth/login` | Log in |
-| POST | `/api/auth/register` | Register new account |
-| POST | `/api/auth/logout` | Log out |
-| GET | `/api/auth/me` | Get current session user |
-| PUT | `/api/auth/profile` | Update profile (name, contact) |
+The dashboard provides an overview of the network, including:
 
-### Devices
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/devices` | List all devices |
-| DELETE | `/api/devices/:id` | Delete device (Admin) |
-| PUT | `/api/devices/:id/location` | Update device metadata |
-| GET | `/api/devices/:id/ping` | Live ping specific device |
+* Total discovered devices
+* Online devices
+* Offline devices
+* Average latency
+* Active alerts
+* Latency trends
+* Live monitoring information
 
-### Monitoring
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/monitor/router` | On-demand router scan |
-| POST | `/api/monitor/discover` | Trigger network discovery |
-| GET | `/api/ping?target=IP` | Ping arbitrary IP |
-
-### Topology
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/topology` | Network topology (devices + links) |
-
-### Alerts
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/alerts` | Last 100 alerts |
-| PUT | `/api/alerts/:id/resolve` | Resolve alert |
-
-### Analytics
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/analytics/overview?period=24h` | Summary stats |
-| GET | `/api/analytics/latency-trend?period=7d` | Latency time series |
-| GET | `/api/analytics/device-uptime?period=30d` | Per-device uptime % |
-| GET | `/api/analytics/alerts-summary?period=24h` | Alert breakdown |
-
-### Settings (Admin)
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/settings/scanning` | Scanning enabled status |
-| PUT | `/api/settings/scanning` | Toggle scanning |
-| GET | `/api/settings/email-alerts` | Email alert config |
-| POST | `/api/settings/email-alerts` | Update email alerts |
-
-### Users (Admin)
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/users` | List all users |
-| PUT | `/api/users/:id/role` | Change user role |
-| DELETE | `/api/users/:id` | Delete user |
-
-### Audit
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/activity-logs` | Paginated audit logs (Admin) |
-
-### Real-Time (Socket.IO)
-| Event | Direction | Description |
-|-------|-----------|-------------|
-| `topology:update` | Server → Client | Topology changed |
-| `devices:update` | Server → Client | Device list changed |
-| `devices:ping_stream` | Server → Client | Live latency data (2s) |
-| `alert:new` | Server → Client | New alert generated |
+Real-time information is updated through Socket.IO.
 
 ---
 
-## 13. Troubleshooting
+## 🖥️ Devices
 
-### Server fails to connect to Supabase
-- Set `SUPABASE_DB_URL` to the session-pooler connection string with the database password.
-- Run `npm run db:migrate` in `server/` before starting the backend.
-- If TLS verification fails, set `SUPABASE_DB_CA_FILE` to the project's downloaded CA certificate.
-- MySQL `DB_*` settings are used only by the import script.
+The Devices page displays discovered network devices.
 
-### Gateway not detected / no devices discovered
-- Confirm `ROUTER_IP` in `.env` matches your actual gateway (check with `ipconfig` on Windows)
-- Run the server as Administrator on Windows (ICMP ping may require elevated privileges)
-- Set `NETWORK_CIDR` explicitly if auto-detection fails (e.g., `192.168.1.0/24`)
+Users can view information such as:
 
-### Email alerts not sending
-- Verify `SMTP_USER` and `SMTP_PASS` are correct (use a Gmail App Password, not your login password)
-- Check that 2-Step Verification is enabled on the Gmail account
-- Set `ALERT_EMAIL_ENABLED=true` in `.env`
-- Toggle email alerts from the Settings page after login
+* IP address
+* MAC address
+* Device status
+* Latency
+* Device type
+* Building
+* Floor
+* Room
+* Location
 
-### `CORS` errors in browser console
-- The backend must be running on port 4000
-- Set `ALLOWED_ORIGINS` in `.env` to the URL serving your frontend
-- Do not open HTML files via a different port without updating `ALLOWED_ORIGINS`
+Authorized users can also:
 
-### Real-time updates not working
-- Confirm Socket.IO client version matches server (both 4.7.5)
-- Check browser console for WebSocket errors
-- Ensure no firewall is blocking port 4000
+* Edit device information
+* Ping a device
+* Classify devices
+* Filter devices
+* Delete devices
 
 ---
 
-## 14. Deployment
+## 🌐 Network Topology
 
-### Backend (any VPS / server)
+The topology module provides multiple ways to visualize the campus network.
+
+### Graph View
+
+Displays devices and their network relationships using an interactive graph.
+
+### Floor Map
+
+Allows network devices to be positioned according to their physical location in the IC Building.
+
+### Hierarchy View
+
+Organizes devices according to their network or physical hierarchy.
+
+---
+
+## 🚨 Alerts
+
+The Alerts page displays network events such as:
+
+* Device downtime
+* Device recovery
+* High latency
+* Warning conditions
+
+Alerts can contain different severity levels to help IT personnel prioritize actionable network problems.
+
+Authorized users can mark alerts as resolved.
+
+---
+
+## 📈 Reports and Analytics
+
+Analytics can be viewed for different periods:
+
+```text
+24 Hours
+7 Days
+30 Days
+```
+
+Available information includes:
+
+* Network overview
+* Latency trends
+* Device uptime
+* Device downtime
+* Alert summaries
+* Device performance trends
+
+Reports can also be exported when supported.
+
+---
+
+## ⚙️ Settings
+
+**Administrator only**
+
+Administrators can configure:
+
+* Automated scanning
+* Scan intervals
+* Email alerts
+* Monitoring settings
+
+---
+
+## 👥 User Management
+
+**Administrator only**
+
+Administrators can:
+
+* View users
+* Create users
+* Change user roles
+* Delete accounts
+
+---
+
+## 📜 Activity Log
+
+**Administrator only**
+
+The system maintains an audit trail containing information such as:
+
+* User
+* Action
+* IP address
+* Date
+* Time
+* System event
+
+This helps administrators review important actions performed within the system.
+
+---
+
+# 🔌 API Reference
+
+The backend API runs at:
+
+```text
+http://localhost:4000
+```
+
+## Authentication
+
+| Method | Endpoint             | Description           |
+| ------ | -------------------- | --------------------- |
+| POST   | `/api/auth/login`    | Authenticate user     |
+| POST   | `/api/auth/register` | Register account      |
+| POST   | `/api/auth/logout`   | End current session   |
+| GET    | `/api/auth/me`       | Retrieve current user |
+| PUT    | `/api/auth/profile`  | Update user profile   |
+
+## Devices
+
+| Method | Endpoint                    | Description               |
+| ------ | --------------------------- | ------------------------- |
+| GET    | `/api/devices`              | Retrieve devices          |
+| DELETE | `/api/devices/:id`          | Delete device             |
+| PUT    | `/api/devices/:id/location` | Update device information |
+| GET    | `/api/devices/:id/ping`     | Ping a specific device    |
+
+## Monitoring
+
+| Method | Endpoint                | Description                 |
+| ------ | ----------------------- | --------------------------- |
+| GET    | `/api/monitor/router`   | Perform router/network scan |
+| POST   | `/api/monitor/discover` | Trigger device discovery    |
+| GET    | `/api/ping?target=IP`   | Ping an IP address          |
+
+## Topology
+
+| Method | Endpoint        | Description               |
+| ------ | --------------- | ------------------------- |
+| GET    | `/api/topology` | Retrieve network topology |
+
+## Alerts
+
+| Method | Endpoint                  | Description            |
+| ------ | ------------------------- | ---------------------- |
+| GET    | `/api/alerts`             | Retrieve recent alerts |
+| PUT    | `/api/alerts/:id/resolve` | Resolve an alert       |
+
+## Analytics
+
+| Method | Endpoint                                   | Description      |
+| ------ | ------------------------------------------ | ---------------- |
+| GET    | `/api/analytics/overview?period=24h`       | Network overview |
+| GET    | `/api/analytics/latency-trend?period=7d`   | Latency trends   |
+| GET    | `/api/analytics/device-uptime?period=30d`  | Device uptime    |
+| GET    | `/api/analytics/alerts-summary?period=24h` | Alert summary    |
+
+## Settings
+
+**Administrator only**
+
+| Method | Endpoint                     | Description                  |
+| ------ | ---------------------------- | ---------------------------- |
+| GET    | `/api/settings/scanning`     | Get scanning status          |
+| PUT    | `/api/settings/scanning`     | Enable/disable scanning      |
+| GET    | `/api/settings/email-alerts` | Retrieve email configuration |
+| POST   | `/api/settings/email-alerts` | Update email alert settings  |
+
+## Users
+
+**Administrator only**
+
+| Method | Endpoint              | Description      |
+| ------ | --------------------- | ---------------- |
+| GET    | `/api/users`          | Retrieve users   |
+| PUT    | `/api/users/:id/role` | Change user role |
+| DELETE | `/api/users/:id`      | Delete user      |
+
+## Audit Logs
+
+| Method | Endpoint             | Description            |
+| ------ | -------------------- | ---------------------- |
+| GET    | `/api/activity-logs` | Retrieve activity logs |
+
+---
+
+# ⚡ Real-Time Events
+
+SmartCampus SecureNet uses **Socket.IO** for real-time communication.
+
+| Event                 | Direction       | Description                |
+| --------------------- | --------------- | -------------------------- |
+| `topology:update`     | Server → Client | Network topology changed   |
+| `devices:update`      | Server → Client | Device information changed |
+| `devices:ping_stream` | Server → Client | Live latency information   |
+| `alert:new`           | Server → Client | New network alert          |
+
+---
+
+# 🔧 Troubleshooting
+
+## Cannot Connect to Supabase
+
+Check that:
+
+```env
+SUPABASE_DB_URL=
+```
+
+contains the correct PostgreSQL session-pooler connection string.
+
+Then run:
 
 ```bash
-# Install PM2 for process management
-npm install -g pm2
+cd server
+npm run db:migrate
+```
 
+Restart the backend afterward.
+
+---
+
+## Gateway Not Detected
+
+Check the gateway on Windows:
+
+```bash
+ipconfig
+```
+
+Confirm that `ROUTER_IP` matches the correct network gateway.
+
+If automatic network detection fails, configure:
+
+```env
+NETWORK_CIDR=192.168.1.0/24
+```
+
+---
+
+## No Devices Discovered
+
+Make sure:
+
+* The backend computer is connected to the target network.
+* The gateway address is correct.
+* ICMP is permitted.
+* The server has the required permissions.
+* The target devices are reachable.
+
+On Windows, try running the terminal as **Administrator**.
+
+---
+
+## Email Alerts Not Working
+
+Check:
+
+```env
+ALERT_EMAIL_ENABLED=true
+```
+
+Also verify:
+
+* `SMTP_USER`
+* `SMTP_PASS`
+* Gmail 2-Step Verification
+* Gmail App Password
+* Email alert settings in the application
+
+---
+
+## CORS Error
+
+Make sure the backend is running on:
+
+```text
+http://localhost:4000
+```
+
+Check:
+
+```env
+ALLOWED_ORIGINS=http://localhost:3000
+```
+
+The value should match the frontend address.
+
+---
+
+## Real-Time Updates Not Working
+
+Check:
+
+* Socket.IO server is running.
+* Socket.IO client is connected.
+* Browser console does not contain WebSocket errors.
+* Port `4000` is not blocked by the firewall.
+
+---
+
+# 🌐 Deployment
+
+## Backend
+
+The backend can be deployed to a VPS or another server capable of accessing the monitored network.
+
+Install PM2:
+
+```bash
+npm install -g pm2
+```
+
+Start the backend:
+
+```bash
 cd smartCampus/server
+
 pm2 start server.js --name smartcampus-backend
 pm2 save
 pm2 startup
 ```
 
-Set `SESSION_COOKIE_SECURE=true` and run behind an HTTPS reverse proxy (nginx/Caddy).
+For production:
 
-### Frontend (Vercel)
+```env
+SESSION_COOKIE_SECURE=true
+```
 
-The `vercel.json` at the project root rewrites all routes to `html/index.html`. Deploy the project root to Vercel:
+The backend should be served through **HTTPS** using a reverse proxy such as nginx or Caddy.
+
+> **Important:** Network discovery requires access to the actual target network. A cloud-hosted backend generally cannot perform ARP discovery of devices inside a private campus LAN unless appropriate network connectivity is provided.
+
+---
+
+## Frontend
+
+The static frontend can be deployed using Vercel.
+
+From the project root:
 
 ```bash
 npm install -g vercel
 vercel --prod
 ```
 
-Update `ALLOWED_ORIGINS` in the backend `.env` to the deployed Vercel domain.
+After deployment, update:
+
+```env
+ALLOWED_ORIGINS=https://your-frontend-domain
+```
 
 ---
 
-## 15. Security Notes
+# 🔐 Security Notes
 
-> The following must be addressed before any public or production deployment:
+Before deploying SmartCampus SecureNet, follow these security practices:
 
-1. **Never commit `.env`** — The `.gitignore` excludes it; verify it was never accidentally committed with `git log --all --full-history -- .env`.
-2. **Rotate credentials** if the `.env` was ever committed — revoke and regenerate your Gmail App Password and choose a new `SESSION_SECRET`.
-3. **Use HTTPS** in production — set `SESSION_COOKIE_SECURE=true` and enforce HTTPS at the reverse proxy level.
-4. **Restrict CORS** — set `ALLOWED_ORIGINS` to only your frontend domain, not a wildcard.
-5. **Rate limiting** — `express-rate-limit` is applied to `/api/auth/login` (5 attempts / 15 min). Do not remove it.
+1. **Never commit `.env` files.**
+2. Never expose Supabase secret or administrative keys to the frontend.
+3. Use a strong and randomly generated `SESSION_SECRET`.
+4. Enable HTTPS in production.
+5. Set `SESSION_COOKIE_SECURE=true` when using HTTPS.
+6. Restrict `ALLOWED_ORIGINS` to trusted frontend domains.
+7. Use role-based authorization for administrative endpoints.
+8. Keep passwords hashed using `bcryptjs`.
+9. Use Gmail App Passwords instead of normal Gmail passwords.
+10. Rotate credentials immediately if they are accidentally committed.
+11. Maintain authentication rate limiting.
+12. Regularly review activity and audit logs.
+
+To check whether `.env` was previously committed:
+
+```bash
+git log --all --full-history -- .env
+```
 
 ---
 
-*SmartCampus SecureNet — Capstone Project, DNSC IC Building*
-#   S M A R T C A M P U S  
- #   S M A R T C A M P U S  
- 
+# 🎓 Project Information
+
+**Project Title:**
+SmartCampus SecureNet: A Web-Based Device Mapping and Monitoring Dashboard for Network and Security Devices
+
+**Institution:**
+Davao del Norte State College (DNSC)
+
+**Institute:**
+Institute of Computing
+
+**Location:**
+Panabo City, Davao del Norte, Philippines
+
+**Target Environment:**
+IC Building Network
+
+**Project Type:**
+Capstone Project
+
+---
+
+## 🎯 Project Goal
+
+SmartCampus SecureNet aims to provide a centralized and efficient way of discovering, monitoring, visualizing, and managing network devices within the DNSC IC Building.
+
+Through real-time monitoring, device mapping, analytics, alert management, and reporting, the system is designed to help Network Administrators and IT Personnel maintain better visibility of the network environment and respond more efficiently to connectivity issues.
+
+---
+
+<div align="center">
+
+### 🛡️ SmartCampus SecureNet
+
+**Monitor • Visualize • Analyze • Secure**
+
+Davao del Norte State College
+Institute of Computing
+
+</div>
