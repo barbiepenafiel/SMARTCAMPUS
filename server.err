@@ -1,645 +1,263 @@
-Migration error (CreatedAt backfill): Table 'device_log' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
+Continuous ping sweep error: Error: Connection terminated due to connection timeout
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async runScheduledRouterScan (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async Timeout.runContinuousPingSweep [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1484:20) {
+  [cause]: Error: Connection terminated unexpectedly
+      at Connection.<anonymous> (C:\Projects\smartCampus\server\node_modules\pg\lib\client.js:204:73)
+      at Object.onceWrapper (node:events:622:28)
+      at Connection.emit (node:events:508:28)
+      at Socket.<anonymous> (C:\Projects\smartCampus\server\node_modules\pg\lib\connection.js:64:12)
+      at Socket.emit (node:events:520:35)
+      at TCP.<anonymous> (node:net:346:12)
 }
-insertAlert error: Table 'alert' is read only
-Scheduled discovery scan error: Error: Table 'device' is read only
-    at upsertDiscoveredDevice (c:\Projects\smartCampus\server\server.js:669:18)
+Continuous ping sweep error: Error: Connection terminated due to connection timeout
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async discoverNetworkDevices (c:\Projects\smartCampus\server\server.js:1294:22)
-    at async runScheduledDiscoveryScan (c:\Projects\smartCampus\server\server.js:1451:20) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async Timeout.runContinuousPingSweep [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1484:20) {
+  [cause]: Error: Connection terminated unexpectedly
+      at Connection.<anonymous> (C:\Projects\smartCampus\server\node_modules\pg\lib\client.js:204:73)
+      at Object.onceWrapper (node:events:622:28)
+      at Connection.emit (node:events:508:28)
+      at Socket.<anonymous> (C:\Projects\smartCampus\server\node_modules\pg\lib\connection.js:64:12)
+      at Socket.emit (node:events:520:35)
+      at TCP.<anonymous> (node:net:346:12)
 }
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
+Scheduled device ping sweep error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:567:9)
+    at process.processTimers (node:internal/timers:541:7)
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async insertDeviceLog (C:\Projects\smartCampus\server\server.js:581:3)
+    at async C:\Projects\smartCampus\server\server.js:1750:7
+    at async C:\Projects\smartCampus\server\server.js:1220:31
+    at async Promise.all (index 16)
+    at async runWithConcurrency (C:\Projects\smartCampus\server\server.js:1224:3)
+Scheduled device ping sweep error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:567:9)
+    at process.processTimers (node:internal/timers:541:7)
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async C:\Projects\smartCampus\server\server.js:1743:9
+    at async C:\Projects\smartCampus\server\server.js:1220:31
+    at async Promise.all (index 10)
+    at async runWithConcurrency (C:\Projects\smartCampus\server\server.js:1224:3)
+    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1713:5)
+Topology broadcast error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async fetchTopologyPayload (C:\Projects\smartCampus\server\server.js:895:18)
+    at async emitTopologyUpdate (C:\Projects\smartCampus\server\server.js:960:21)
+Continuous ping sweep error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async Timeout.runContinuousPingSweep [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1484:20)
+Scheduled discovery scan error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:567:9)
+    at process.processTimers (node:internal/timers:541:7)
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async findDeviceByIpOrMac (C:\Projects\smartCampus\server\server.js:550:18)
+    at async upsertDiscoveredDevice (C:\Projects\smartCampus\server\server.js:660:20)
+    at async discoverNetworkDevices (C:\Projects\smartCampus\server\server.js:1305:22)
+    at async runScheduledDiscoveryScan (C:\Projects\smartCampus\server\server.js:1462:20)
+Scheduled device ping sweep error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:567:9)
+    at process.processTimers (node:internal/timers:541:7)
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async C:\Projects\smartCampus\server\server.js:1743:9
+    at async C:\Projects\smartCampus\server\server.js:1220:31
+    at async Promise.all (index 15)
+    at async runWithConcurrency (C:\Projects\smartCampus\server\server.js:1224:3)
+    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1713:5)
+Scheduled router scan error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async insertDeviceLog (C:\Projects\smartCampus\server\server.js:581:3)
+    at async upsertDeviceSnapshot (C:\Projects\smartCampus\server\server.js:632:5)
+    at async Timeout.runScheduledRouterScan [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1444:5)
+Continuous ping sweep error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async Timeout.runContinuousPingSweep [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1484:20)
+Scheduled device ping sweep error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:567:9)
+    at process.processTimers (node:internal/timers:541:7)
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async C:\Projects\smartCampus\server\server.js:1743:9
+    at async C:\Projects\smartCampus\server\server.js:1220:31
+    at async Promise.all (index 0)
+    at async runWithConcurrency (C:\Projects\smartCampus\server\server.js:1224:3)
+    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1713:5)
+Scheduled router scan error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async findDeviceByIpOrMac (C:\Projects\smartCampus\server\server.js:550:18)
+    at async upsertDeviceSnapshot (C:\Projects\smartCampus\server\server.js:597:20)
+    at async Timeout.runScheduledRouterScan [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1444:5)
+Scheduled device ping sweep error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1707:20)
+Scheduled device ping sweep error: Error: timeout exceeded when trying to connect
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1707:20)
+Scheduled discovery scan error: error: duplicate key value violates unique constraint "DEVICE_MACAddress_key"
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async upsertDiscoveredDevice (C:\Projects\smartCampus\server\server.js:680:5)
+    at async discoverNetworkDevices (C:\Projects\smartCampus\server\server.js:1305:22)
+    at async Timeout.runScheduledDiscoveryScan [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1462:20) {
+  length: 229,
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key ("MACAddress")=(7e-68-e5-fd-9e-b4) already exists.',
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: 'public',
+  table: 'DEVICE',
+  column: undefined,
+  dataType: undefined,
+  constraint: 'DEVICE_MACAddress_key',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
 }
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-Activity log error: Table 'activity_logs' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
+Scheduled discovery scan error: error: duplicate key value violates unique constraint "DEVICE_MACAddress_key"
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async upsertDiscoveredDevice (C:\Projects\smartCampus\server\server.js:680:5)
+    at async discoverNetworkDevices (C:\Projects\smartCampus\server\server.js:1305:22)
+    at async Timeout.runScheduledDiscoveryScan [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1462:20) {
+  length: 229,
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key ("MACAddress")=(7e-68-e5-fd-9e-b4) already exists.',
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: 'public',
+  table: 'DEVICE',
+  column: undefined,
+  dataType: undefined,
+  constraint: 'DEVICE_MACAddress_key',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
 }
-insertAlert error: Table 'alert' is read only
-Device upsert error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
+Scheduled discovery scan error: error: duplicate key value violates unique constraint "DEVICE_MACAddress_key"
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async c:\Projects\smartCampus\server\server.js:2306:5 {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async upsertDiscoveredDevice (C:\Projects\smartCampus\server\server.js:680:5)
+    at async discoverNetworkDevices (C:\Projects\smartCampus\server\server.js:1305:22)
+    at async Timeout.runScheduledDiscoveryScan [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1462:20) {
+  length: 229,
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key ("MACAddress")=(7e-68-e5-fd-9e-b4) already exists.',
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: 'public',
+  table: 'DEVICE',
+  column: undefined,
+  dataType: undefined,
+  constraint: 'DEVICE_MACAddress_key',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
 }
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-analytics/ai-insights error: GoogleGenerativeAIFetchError: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent: [404 Not Found] models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
-    at handleResponseNotOk (c:\Projects\smartCampus\server\node_modules\@google\generative-ai\dist\index.js:434:11)
+Scheduled discovery scan error: error: duplicate key value violates unique constraint "DEVICE_MACAddress_key"
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async makeRequest (c:\Projects\smartCampus\server\node_modules\@google\generative-ai\dist\index.js:403:9)
-    at async generateContent (c:\Projects\smartCampus\server\node_modules\@google\generative-ai\dist\index.js:867:22)
-    at async c:\Projects\smartCampus\server\server.js:2713:20 {
-  status: 404,
-  statusText: 'Not Found',
-  errorDetails: undefined
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async upsertDiscoveredDevice (C:\Projects\smartCampus\server\server.js:680:5)
+    at async discoverNetworkDevices (C:\Projects\smartCampus\server\server.js:1305:22)
+    at async Timeout.runScheduledDiscoveryScan [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1462:20) {
+  length: 229,
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key ("MACAddress")=(7e-68-e5-fd-9e-b4) already exists.',
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: 'public',
+  table: 'DEVICE',
+  column: undefined,
+  dataType: undefined,
+  constraint: 'DEVICE_MACAddress_key',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
 }
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
+Scheduled discovery scan error: error: duplicate key value violates unique constraint "DEVICE_MACAddress_key"
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async upsertDiscoveredDevice (C:\Projects\smartCampus\server\server.js:680:5)
+    at async discoverNetworkDevices (C:\Projects\smartCampus\server\server.js:1305:22)
+    at async Timeout.runScheduledDiscoveryScan [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1462:20) {
+  length: 229,
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key ("MACAddress")=(7e-68-e5-fd-9e-b4) already exists.',
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: 'public',
+  table: 'DEVICE',
+  column: undefined,
+  dataType: undefined,
+  constraint: 'DEVICE_MACAddress_key',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
 }
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
+Scheduled discovery scan error: error: duplicate key value violates unique constraint "DEVICE_MACAddress_key"
+    at C:\Projects\smartCampus\server\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-insertAlert error: Table 'alert' is read only
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled discovery scan error: Error: Table 'device' is read only
-    at upsertDiscoveredDevice (c:\Projects\smartCampus\server\server.js:669:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async discoverNetworkDevices (c:\Projects\smartCampus\server\server.js:1294:22)
-    at async Timeout.runScheduledDiscoveryScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1451:20) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 8)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Device upsert error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async c:\Projects\smartCampus\server\server.js:2306:5 {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-insertAlert error: Table 'alert' is read only
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 6)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Device upsert error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async c:\Projects\smartCampus\server\server.js:2306:5 {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled router scan error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Timeout.runScheduledRouterScan [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1433:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
-}
-Scheduled device ping sweep error: Error: Table 'device' is read only
-    at c:\Projects\smartCampus\server\server.js:1727:22
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async c:\Projects\smartCampus\server\server.js:1209:31
-    at async Promise.all (index 4)
-    at async runWithConcurrency (c:\Projects\smartCampus\server\server.js:1213:3)
-    at async Timeout.runScheduledDevicePingSweep [as _onTimeout] (c:\Projects\smartCampus\server\server.js:1702:5) {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET Status = ?, LastSeen = ? WHERE DeviceID = ?'
-}
-Device upsert error: Error: Table 'device' is read only
-    at upsertDeviceSnapshot (c:\Projects\smartCampus\server\server.js:605:18)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async c:\Projects\smartCampus\server\server.js:2306:5 {
-  code: 'ER_OPEN_AS_READONLY',
-  errno: 1036,
-  sqlState: 'HY000',
-  sqlMessage: "Table 'device' is read only",
-  sql: 'UPDATE DEVICE SET DeviceName = ?, DeviceType = ?, IPAddress = ?, MACAddress = ?, Manufacturer = ?, Model = ?, Status = ?, LastSeen = ?, LocationID = ? WHERE DeviceID = ?'
+    at async Object.execute (C:\Projects\smartCampus\server\postgres.js:39:22)
+    at async upsertDiscoveredDevice (C:\Projects\smartCampus\server\server.js:680:5)
+    at async discoverNetworkDevices (C:\Projects\smartCampus\server\server.js:1305:22)
+    at async Timeout.runScheduledDiscoveryScan [as _onTimeout] (C:\Projects\smartCampus\server\server.js:1462:20) {
+  length: 229,
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key ("MACAddress")=(7e-68-e5-fd-9e-b4) already exists.',
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: 'public',
+  table: 'DEVICE',
+  column: undefined,
+  dataType: undefined,
+  constraint: 'DEVICE_MACAddress_key',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
 }

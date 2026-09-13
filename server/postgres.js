@@ -16,7 +16,8 @@ function createPool() {
       rejectUnauthorized: true,
       ca: fs.readFileSync(process.env.SUPABASE_DB_CA_FILE || path.join(__dirname, 'certs', 'supabase-ca.crt'), 'utf8'),
     },
-    max: process.env.VERCEL ? 3 : 10,
+    // Leave room in the shared session pooler for the cloud dashboard.
+    max: 3,
     connectionTimeoutMillis: 10000,
     idleTimeoutMillis: 30000,
     options: '-c search_path=public -c timezone=UTC',

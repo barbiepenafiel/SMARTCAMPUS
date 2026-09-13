@@ -1,20 +1,23 @@
 require('./env');
-const { createContextClient, createAdminClient } = require('@supabase/server/core');
 
 let clients;
 function getSupabaseClients() {
   if (!clients) {
-    clients = {
+    // Use the ESM entry point: Vercel cannot require jose's ESM dependency.
+    clients = import('@supabase/server/core').then(({ createContextClient, createAdminClient }) => ({
       supabase: createContextClient(),
       supabaseAdmin: createAdminClient(),
-    };
+    })).catch(error => {
+      clients = undefined;
+      throw error;
+    });
   }
   return clients;
 }
 
 // Read-only checks; no application tables or user accounts are changed.
 async function checkSupabaseConnection() {
-  getSupabaseClients();
+  await getSupabaseClients();
   const base = process.env.SUPABASE_URL.replace(/\/$/, '');
   const checks = [
     ['publishable key', `${base}/auth/v1/settings`, process.env.SUPABASE_PUBLISHABLE_KEY],

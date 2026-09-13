@@ -5,3 +5,6 @@ server/.env
 smartcampus_networkmonitoring.sql
 .vercel/
 public/
+
+.vercel
+.env*

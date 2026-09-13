@@ -24,7 +24,12 @@ const app = express();
 const CLOUD_MODE = process.env.VERCEL === '1';
 if (CLOUD_MODE) app.set('trust proxy', 1);
 if (process.env.SUPABASE_URL) {
-  Object.assign(app.locals, getSupabaseClients());
+  app.use((req, res, next) => {
+    getSupabaseClients().then(clients => {
+      Object.assign(app.locals, clients);
+      next();
+    }, next);
+  });
 }
 const PORT = process.env.PORT || 4000;
 const httpServer = http.createServer(app);
